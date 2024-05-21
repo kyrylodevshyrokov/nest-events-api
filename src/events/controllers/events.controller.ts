@@ -17,11 +17,11 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { CreateEventDto } from './dto/create-event.dto';
-import { UpdateEventDto } from './dto/update-event.dto';
+import { CreateEventDto } from '../dto/create-event.dto';
+import { UpdateEventDto } from '../dto/update-event.dto';
 
-import { EventsService } from './events.service';
-import { ListEvents } from './dto/list.events';
+import { EventsService } from '../services/events.service';
+import { ListEvents } from '../dto/list.events';
 import { CurrentUser } from 'src/auth/current-user.decorator';
 import { User } from 'src/auth/entities/user.entity';
 import { AuthGuardJwt } from 'src/auth/guards/auth-guard.jwt';
