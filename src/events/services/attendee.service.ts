@@ -10,7 +10,7 @@ export class AttendeeService {
 
   public async findByEventId(eventId: number): Promise<Attendee[]> {
     return await this.attendeeRepository.find({
-      where: { eventId: eventId },
+      where: { eventId },
     });
   }
 }
