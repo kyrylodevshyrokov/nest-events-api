@@ -4,6 +4,10 @@ import { DeleteResult, Repository } from 'typeorm';
 import { AttendeeAnswerEnum } from './entities/attendee.entity';
 import { ListEvents, WhenEventFilter } from './dto/list.events';
 import { paginate, PaginateOptions } from 'src/pagination/paginator';
+import { CreateEventDto } from './dto/create-event.dto';
+import { User } from 'src/auth/entities/user.entity';
+import { Event } from './entities/event.entity';
+import { UpdateEventDto } from './dto/update-event.dto';
 
 @Injectable()
 export class EventsService {
@@ -104,6 +108,25 @@ export class EventsService {
     );
 
     return await query.getOne();
+  }
+
+  public async createEvent(input: CreateEventDto, user: User): Promise<Event> {
+    return await this.eventsRepository.save({
+      ...input,
+      organizer: user,
+      when: new Date(input.when),
+    });
+  }
+
+  public async updateEvent(
+    event: Event,
+    input: UpdateEventDto,
+  ): Promise<Event> {
+    return await this.eventsRepository.save({
+      ...event,
+      ...input,
+      when: input.when ? new Date(input.when) : event.when,
+    });
   }
 
   public async deleteEvent(id: number): Promise<DeleteResult> {
