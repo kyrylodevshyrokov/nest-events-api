@@ -30,8 +30,6 @@ import { AuthGuardJwt } from 'src/auth/guards/auth-guard.jwt';
 @Controller('/events')
 @SerializeOptions({ strategy: 'excludeAll' })
 export class EventsController {
-  // private readonly logger = new Logger(EventsController.name);
-
   constructor(private readonly eventsService: EventsService) {}
 
   @Get()
@@ -50,23 +48,6 @@ export class EventsController {
 
     return events;
   }
-
-  // @Get('/practice')
-  // async practice() {
-  //   return await this.repository.find({
-  //     where: [
-  //       {
-  //         id: MoreThan(3),
-  //         when: MoreThan(new Date('2021-02-12T13:00:00')),
-  //       },
-  //       { description: Like('%meet%') },
-  //     ],
-  //     take: 2,
-  //     order: {
-  //       id: 'DESC',
-  //     },
-  //   });
-  // }
 
   @Get(':id')
   @UseInterceptors(ClassSerializerInterceptor)
