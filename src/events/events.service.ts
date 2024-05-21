@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { AttendeeAnswerEnum } from './attendee.entity';
+import { DeleteResult, Repository } from 'typeorm';
+import { AttendeeAnswerEnum } from './entities/attendee.entity';
 import { ListEvents, WhenEventFilter } from './dto/list.events';
 import { paginate, PaginateOptions } from 'src/pagination/paginator';
 
@@ -103,8 +103,14 @@ export class EventsService {
       },
     );
 
-    // this.logger.debug(query.getSql());
-
     return await query.getOne();
+  }
+
+  public async deleteEvent(id: number): Promise<DeleteResult> {
+    return await this.eventsRepository
+      .createQueryBuilder('e')
+      .delete()
+      .where('id = :id', { id })
+      .execute();
   }
 }

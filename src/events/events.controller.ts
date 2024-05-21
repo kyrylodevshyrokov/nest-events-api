@@ -17,8 +17,8 @@ import { UpdateEventDto } from './dto/update-event.dto';
 
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Event } from './event.entity';
-import { Attendee } from './attendee.entity';
+import { Event } from './entities/event.entity';
+import { Attendee } from './entities/attendee.entity';
 import { EventsService } from './events.service';
 import { ListEvents } from './dto/list.events';
 
@@ -104,12 +104,10 @@ export class EventsController {
   @Delete(':id')
   @HttpCode(204)
   async remove(@Param('id') id) {
-    const event = await this.repository.findOneBy({ id });
+    const result = await this.eventsService.deleteEvent(id);
 
-    if (!event) {
+    if (result?.affected !== 1) {
       throw new NotFoundException();
     }
-
-    await this.repository.remove(event);
   }
 }
