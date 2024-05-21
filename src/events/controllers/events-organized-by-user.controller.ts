@@ -17,7 +17,7 @@ export class EventsOrganizedByUserController {
   @Get()
   @UseInterceptors(ClassSerializerInterceptor)
   async findAll(@Param('userId') userId: number, @Query('page') page = 1) {
-    return await this.eventsService.getEventsOrganizedByUserIdQueryPaginated(
+    return await this.eventsService.getEventsOrganizedByUserIdPaginated(
       userId,
       { currentPage: page, limit: 5 },
     );
