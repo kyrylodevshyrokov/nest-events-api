@@ -24,11 +24,11 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
       useFactory:
         process.env.NODE_ENV !== 'production' ? ormConfig : ormConfigProd,
     }),
-    GraphQLModule.forRoot<ApolloDriverConfig>({
-      driver: ApolloDriver,
-      autoSchemaFile: true,
-      playground: true,
-    }),
+    // GraphQLModule.forRoot<ApolloDriverConfig>({
+    //   driver: ApolloDriver,
+    //   autoSchemaFile: true,
+    //   playground: true,
+    // }),
     AuthModule,
     EventsModule,
   ],
