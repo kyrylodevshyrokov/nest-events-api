@@ -3,9 +3,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository, SelectQueryBuilder } from 'typeorm';
 import { AttendeeAnswerEnum } from '../entities/attendee.entity';
 import { ListEvents, WhenEventFilter } from '../dto/list.events';
-import { paginate, PaginateOptions } from 'src/pagination/paginator';
+import { paginate, PaginateOptions } from './../../pagination/paginator';
 import { CreateEventDto } from '../dto/create-event.dto';
-import { User } from 'src/auth/entities/user.entity';
+import { User } from './../../auth/entities/user.entity';
 import { Event, PaginatedEvents } from '../entities/event.entity';
 import { UpdateEventDto } from '../dto/update-event.dto';
 

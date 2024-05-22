@@ -15,7 +15,7 @@ import { UsersController } from './controllers/users.controller';
       useFactory: () => ({
         secret: process.env.AUTH_SECRET,
         signOptions: {
-          expiresIn: '60m',
+          expiresIn: process.env.JWT_EXPIRATION_TIME,
         },
       }),
     }),
