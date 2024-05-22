@@ -1,9 +1,10 @@
 import { BadRequestException, Body, Controller, Post } from '@nestjs/common';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 import { CreateUserDto } from '../dto/create.user.dto';
 import { User } from '../entities/user.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { UserService } from '../services/user.service';
 
 @Controller('users')
 export class UsersController {
@@ -11,12 +12,11 @@ export class UsersController {
     private readonly authService: AuthService,
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+    private readonly userService: UserService,
   ) {}
 
   @Post()
   async create(@Body() createUserDto: CreateUserDto) {
-    const user = new User();
-
     if (createUserDto.password !== createUserDto.retypedPassword) {
       throw new BadRequestException(['Passwords are not the same']);
     }
@@ -32,14 +32,10 @@ export class UsersController {
       throw new BadRequestException(['Username or email is already taken']);
     }
 
-    user.username = createUserDto.username;
-    user.password = await this.authService.hashPassword(createUserDto.password);
-    user.email = createUserDto.email;
-    user.firstName = createUserDto.firstName;
-    user.lastName = createUserDto.lastName;
+    const user = await this.userService.create(createUserDto);
 
     return {
-      ...(await this.userRepository.save(user)),
+      ...user,
       token: this.authService.getTokenForUser(user),
     };
   }

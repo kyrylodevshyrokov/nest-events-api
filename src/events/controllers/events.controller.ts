@@ -23,7 +23,7 @@ import { UpdateEventDto } from '../dto/update-event.dto';
 
 import { EventsService } from '../services/events.service';
 import { ListEvents } from '../dto/list.events';
-import { CurrentUser } from './../../auth/current-user.decorator';
+import { CurrentUser } from '../../auth/decorators/current-user.decorator';
 import { User } from './../../auth/entities/user.entity';
 import { AuthGuardJwt } from './../../auth/guards/auth-guard.jwt';
 

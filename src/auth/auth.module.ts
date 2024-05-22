@@ -4,9 +4,12 @@ import { User } from './entities/user.entity';
 import { LocalStrategy } from './strategies/local.strategy';
 import { AuthController } from './controllers/auth.controller';
 import { JwtModule } from '@nestjs/jwt';
-import { AuthService } from './auth.service';
+import { AuthService } from './services/auth.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { UsersController } from './controllers/users.controller';
+import { AuthResolver } from './resolvers/auth.resolver';
+import { UserResolver } from './resolvers/user.resolver';
+import { UserService } from './services/user.service';
 
 @Module({
   imports: [
@@ -20,7 +23,14 @@ import { UsersController } from './controllers/users.controller';
       }),
     }),
   ],
-  providers: [LocalStrategy, JwtStrategy, AuthService],
+  providers: [
+    LocalStrategy,
+    JwtStrategy,
+    AuthService,
+    AuthResolver,
+    UserResolver,
+    UserService,
+  ],
   controllers: [AuthController, UsersController],
 })
 export class AuthModule {}
