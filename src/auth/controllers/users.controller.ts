@@ -17,10 +17,6 @@ export class UsersController {
 
   @Post()
   async create(@Body() createUserDto: CreateUserDto) {
-    if (createUserDto.password !== createUserDto.retypedPassword) {
-      throw new BadRequestException(['Passwords are not the same']);
-    }
-
     const existingUser = await this.userRepository.findOne({
       where: [
         { username: createUserDto.username },
