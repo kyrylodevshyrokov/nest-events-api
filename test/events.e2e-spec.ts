@@ -1,4 +1,4 @@
-import { INestApplication, ValidationPipe } from '@nestjs/common';
+import { HttpStatus, INestApplication, ValidationPipe } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
 import { DataSource } from 'typeorm';
@@ -44,7 +44,7 @@ describe('Events (e2e)', () => {
   it('should return an empty list of events', async () => {
     return request(app.getHttpServer())
       .get('/events')
-      .expect(200)
+      .expect(HttpStatus.OK)
       .then((response) => {
         expect(response.body.data.length).toBe(0);
       });
@@ -55,7 +55,7 @@ describe('Events (e2e)', () => {
 
     return request(app.getHttpServer())
       .get('/events/1')
-      .expect(200)
+      .expect(HttpStatus.OK)
       .then((response) => {
         expect(response.body.id).toBe(1);
         expect(response.body.name).toBe('Interesting Party');
@@ -67,7 +67,7 @@ describe('Events (e2e)', () => {
 
     return request(app.getHttpServer())
       .get(`/events`)
-      .expect(200)
+      .expect(HttpStatus.OK)
       .then((response) => {
         expect(response.body.first).toBe(1);
         expect(response.body.last).toBe(2);
@@ -87,10 +87,10 @@ describe('Events (e2e)', () => {
       .post('/events')
       .set('Authorization', `Bearer ${tokenForUser()}`)
       .send({})
-      .expect(400)
+      .expect(HttpStatus.BAD_REQUEST)
       .then((response) => {
         expect(response.body).toMatchObject({
-          statusCode: 400,
+          statusCode: HttpStatus.BAD_REQUEST,
           message: [
             'The name length is wrong',
             'name must be a string',
@@ -116,11 +116,11 @@ describe('Events (e2e)', () => {
         when,
         address: 'Street 123',
       })
-      .expect(201)
+      .expect(HttpStatus.CREATED)
       .then(async () => {
         const response = await request(app.getHttpServer())
           .get('/events/1')
-          .expect(200);
+          .expect(HttpStatus.OK);
         expect(response.body).toMatchObject({
           id: 1,
           name: 'E2e Event',
@@ -135,7 +135,7 @@ describe('Events (e2e)', () => {
       .put('/events/100')
       .set('Authorization', `Bearer ${tokenForUser()}`)
       .send({})
-      .expect(404);
+      .expect(HttpStatus.NOT_FOUND);
   });
 
   it('should throw an error when changing an event of other user', async () => {
@@ -150,7 +150,7 @@ describe('Events (e2e)', () => {
       .send({
         name: 'Updated event name',
       })
-      .expect(403);
+      .expect(HttpStatus.FORBIDDEN);
   });
 
   it('should update an event name', async () => {
@@ -162,7 +162,7 @@ describe('Events (e2e)', () => {
       .send({
         name: 'Updated event name',
       })
-      .expect(200)
+      .expect(HttpStatus.OK)
       .then((response) => {
         expect(response.body.name).toBe('Updated event name');
       });
@@ -174,7 +174,7 @@ describe('Events (e2e)', () => {
     return request(app.getHttpServer())
       .delete('/events/1')
       .set('Authorization', `Bearer ${tokenForUser()}`)
-      .expect(204)
+      .expect(HttpStatus.NO_CONTENT)
       .then(() => {
         return request(app.getHttpServer()).get('/events/1').expect(404);
       });
@@ -189,7 +189,7 @@ describe('Events (e2e)', () => {
         'Authorization',
         `Bearer ${tokenForUser({ id: 2, username: 'nasty' })}`,
       )
-      .expect(403);
+      .expect(HttpStatus.FORBIDDEN);
   });
 
   it('should throw an error when removing non existing event', async () => {
@@ -198,6 +198,6 @@ describe('Events (e2e)', () => {
     return request(app.getHttpServer())
       .delete('/events/100')
       .set('Authorization', `Bearer ${tokenForUser()}`)
-      .expect(404);
+      .expect(HttpStatus.NOT_FOUND);
   });
 });

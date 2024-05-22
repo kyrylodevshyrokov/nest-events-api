@@ -6,6 +6,7 @@ import {
   ForbiddenException,
   Get,
   HttpCode,
+  HttpStatus,
   NotFoundException,
   Param,
   ParseIntPipe,
@@ -94,7 +95,7 @@ export class EventsController {
 
   @Delete(':id')
   @UseGuards(AuthGuardJwt)
-  @HttpCode(204)
+  @HttpCode(HttpStatus.NO_CONTENT)
   async remove(@Param('id', ParseIntPipe) id, @CurrentUser() user: User) {
     const event = await this.eventsService.findOne(id);
 

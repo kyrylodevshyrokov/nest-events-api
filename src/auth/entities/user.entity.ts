@@ -6,7 +6,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Profile } from './prifile.entity';
+import { Profile } from './profile.entity';
 
 import { Expose } from 'class-transformer';
 import { Event } from './../../events/entities/event.entity';

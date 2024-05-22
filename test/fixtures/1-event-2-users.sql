@@ -33,7 +33,7 @@ VALUES
     (
         NULL,
         'nasty',
-        '$2b$10$5v5ZIVbPGXf0126yUiiys.z/POxSaus.iSbzXj7cTRW9KWGy5bfcq',
+        '$2b$10$5v5ZIVbPGXf0126yUiiys.z/POxSaus.iSbzXj7cTRW9KWGy5bfqq',
         'nasty@test.com',
         'End',
         'To End',
