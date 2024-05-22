@@ -11,7 +11,6 @@ import { UpdateEventDto } from '../dto/update-event.dto';
 
 @Injectable()
 export class EventsService {
-  //   private readonly logger = new Logger(EventsService.name);
   constructor(
     @InjectRepository(Event)
     private readonly eventsRepository: Repository<Event>,
@@ -95,8 +94,9 @@ export class EventsService {
     filter: ListEvents,
     paginateOptions: PaginateOptions,
   ): Promise<PaginatedEvents> {
-    return await paginate(
+    return await paginate<Event, PaginatedEvents>(
       await this.getEventsWithAttendeeCountFilteredQuery(filter),
+      PaginatedEvents,
       paginateOptions,
     );
   }
@@ -153,8 +153,9 @@ export class EventsService {
     userId: number,
     paginateOptions: PaginateOptions,
   ): Promise<PaginatedEvents> {
-    return await paginate<Event>(
+    return await paginate<Event, PaginatedEvents>(
       this.getEventsOrganizedByUserIdQuery(userId),
+      PaginatedEvents,
       paginateOptions,
     );
   }
@@ -171,8 +172,9 @@ export class EventsService {
     userId: number,
     paginateOptions: PaginateOptions,
   ): Promise<PaginatedEvents> {
-    return await paginate<Event>(
+    return await paginate<Event, PaginatedEvents>(
       this.getEventsAttendedByUserIdQuery(userId),
+      PaginatedEvents,
       paginateOptions,
     );
   }
