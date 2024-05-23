@@ -23,6 +23,31 @@ This API is designed for user registration and authentication, allowing users to
 ## Getting Started
 
 1. Clone the repository to your local machine.
-2. Install dependencies using `npm install`.
-3. Start Docker using `docker-compose up`.
-4. Launch the local server using `npm run start:dev`.
+   
+2. Install dependencies using
+```bash
+npm install
+```
+   
+3. Host MySQL for local development using Docker:
+```bash
+docker-compose up
+```
+
+4. Fill `dev.env` file. Here is an example:
+```bash
+DB_HOST=localhost
+DB_PORT=3306
+DB_USER=root
+DB_PASSWORD=example
+DB_NAME=nest-events
+DB_DROP_SCHEMA=0
+APP_PORT=3000
+AUTH_SECRET=secret
+JWT_EXPIRATION_TIME=60m
+```
+   
+5. Launch the local server using
+```bash
+npm run start:dev
+```
