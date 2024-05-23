@@ -64,3 +64,36 @@ npm run test:e2e
 # test coverage
 npm run test:cov
 ```
+
+## API Endpoints
+Here are the routes that can be used for routing in the app.
+
+### _Auth And Users_
+
+### Register
+
+### Authenticate
+
+### Get Current User Profile
+
+### _Events_
+
+### Create Event
+
+### Get All Events
+
+### Get Single Event
+
+### Delete Event
+
+### Get Events Organized By User
+
+### _Event Attendance_
+
+### Get Event Attendees
+
+### Attend Event
+
+### Get Specific Event Attendance By Current User
+
+### Get All Events Attendance By Current User
