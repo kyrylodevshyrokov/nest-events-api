@@ -77,12 +77,12 @@ Here are the routes that can be used for routing in the app.
 - Data:
 ```bash
 {
-    "username": "mister1",
+    "username": "Jonny",
     "password": "password",
     "retypedPassword": "password",
-    "firstName": "John",
-    "lastName": "Terry2",
-    "email": "mister@gmail.com"
+    "firstName": "Jonny",
+    "lastName": "Doe",
+    "email": "john@gmail.com"
 }
 ```
 - Requires Auth: **No**
@@ -90,7 +90,24 @@ Here are the routes that can be used for routing in the app.
 
 ### Authenticate
 
+- Method: **POST**
+- URL: {{URL}}/auth/login
+- Data:
+```bash
+{
+    "username": "Jonny",
+    "password": "password",
+}
+```
+- Requires Auth: **No**
+- Description: This endpoint enables users authenticate by sending a POST request with their username and password; upon successful authentication, the server returns a JSON object containing an access token.
+
 ### Get Current User Profile
+
+- Method: **GET**
+- URL: {{URL}}/auth/profile
+- Requires Auth: **YES**
+- Description: This endpoint retrieves the profile information of the currently authenticated user. 
 
 ### _Events_
 
