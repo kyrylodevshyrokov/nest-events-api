@@ -77,7 +77,10 @@ describe('Events (e2e)', () => {
   });
 
   it('should throw a an error when creating event being unauthenticated', () => {
-    return request(app.getHttpServer()).post('/events').send({}).expect(401);
+    return request(app.getHttpServer())
+      .post('/events')
+      .send({})
+      .expect(HttpStatus.UNAUTHORIZED);
   });
 
   it('should throw an error when creating event with wrong input', async () => {
@@ -176,7 +179,9 @@ describe('Events (e2e)', () => {
       .set('Authorization', `Bearer ${tokenForUser()}`)
       .expect(HttpStatus.NO_CONTENT)
       .then(() => {
-        return request(app.getHttpServer()).get('/events/1').expect(404);
+        return request(app.getHttpServer())
+          .get('/events/1')
+          .expect(HttpStatus.NOT_FOUND);
       });
   });
 
