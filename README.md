@@ -51,3 +51,16 @@ JWT_EXPIRATION_TIME=60m
 ```bash
 npm run start:dev
 ```
+
+## Test the App
+
+```bash
+# unit tests
+npm run test
+
+# e2e tests
+npm run test:e2e
+
+# test coverage
+npm run test:cov
+```
