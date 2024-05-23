@@ -72,6 +72,22 @@ Here are the routes that can be used for routing in the app.
 
 ### Register
 
+- Method: **POST**
+- URL: {{URL}}/users
+- Data:
+```bash
+{
+    "username": "mister1",
+    "password": "password",
+    "retypedPassword": "password",
+    "firstName": "John",
+    "lastName": "Terry2",
+    "email": "mister@gmail.com"
+}
+```
+- Requires Auth: **No**
+- Description: This endpoint enables users to register by sending a POST request containing their chosen username, password, first name, last name, and email.
+
 ### Authenticate
 
 ### Get Current User Profile
