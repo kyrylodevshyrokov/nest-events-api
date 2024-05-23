@@ -85,7 +85,7 @@ Here are the routes that can be used for routing in the app.
     "email": "john@gmail.com"
 }
 ```
-- Requires Auth: **No**
+- Requires Auth: **NO**
 - Description: This endpoint enables users to register by sending a POST request containing their chosen username, password, first name, last name, and email.
 
 ### Authenticate
@@ -96,10 +96,10 @@ Here are the routes that can be used for routing in the app.
 ```bash
 {
     "username": "Jonny",
-    "password": "password",
+    "password": "password"
 }
 ```
-- Requires Auth: **No**
+- Requires Auth: **NO**
 - Description: This endpoint enables users authenticate by sending a POST request with their username and password; upon successful authentication, the server returns a JSON object containing an access token.
 
 ### Get Current User Profile
@@ -113,13 +113,47 @@ Here are the routes that can be used for routing in the app.
 
 ### Create Event
 
+- Method: **POST**
+- URL: {{URL}}/events
+- Data:
+```bash
+{
+    "name": "Interesting Party",
+    "description": "That is a crazy event, must go there!",
+    "address": "Local St 101",
+    "when": "2023-08-16 21:00:00"
+}
+```
+- Requires Auth: **YES**
+- Description: This endpoint allows authenticated users to create a new event with filled following fields: name, description, address, and when.
+
 ### Get All Events
+
+- Method: **GET**
+- URL: {{URL}}/events
+- Requires Auth: **NO**
+- Description: This endpoint allows for both authenticated and unauthenticated users to retrieve all events.
 
 ### Get Single Event
 
+- Method: **GET**
+- URL: {{URL}}/events/:id
+- Requires Auth: **NO**
+- Description: This endpoint allows users to retrieve information about a specific event with ID.
+
 ### Delete Event
 
+- Method: **DELETE**
+- URL: {{URL}}/events/:id
+- Requires Auth: **YES**
+- Description: This endpoint allows authenticated users to delete an event with ID.
+
 ### Get Events Organized By User
+
+- Method: **GET**
+- URL: {{URL}}/events-organized-by-user/:id
+- Requires Auth: **NO**
+- Description: This endpoint allows users to retrieve a list of events organized by the user with ID.
 
 ### _Event Attendance_
 
