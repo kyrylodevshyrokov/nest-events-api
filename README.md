@@ -132,14 +132,14 @@ Here are the routes that can be used for routing in the app.
 - Method: **GET**
 - URL: {{URL}}/events
 - Requires Auth: **NO**
-- Description: This endpoint allows for both authenticated and unauthenticated users to retrieve all events.
+- Description: This endpoint allows both authenticated and unauthenticated users to retrieve all events.
 
 ### Get Single Event
 
 - Method: **GET**
 - URL: {{URL}}/events/:id
 - Requires Auth: **NO**
-- Description: This endpoint allows users to retrieve information about a specific event with ID.
+- Description: This endpoint allows both authenticated and unauthenticated users to retrieve information about a specific event with ID.
 
 ### Delete Event
 
@@ -153,14 +153,40 @@ Here are the routes that can be used for routing in the app.
 - Method: **GET**
 - URL: {{URL}}/events-organized-by-user/:id
 - Requires Auth: **NO**
-- Description: This endpoint allows users to retrieve a list of events organized by the user with ID.
+- Description: This endpoint allows both authenticated and unauthenticated users to retrieve a list of events organized by the user with ID.
 
 ### _Event Attendance_
 
 ### Get Event Attendees
 
+- Method: **GET**
+- URL: {{URL}}/events/:id/attendees
+- Requires Auth: **NO**
+- Description: This endpoint allows both authenticated and unauthenticated users to retrieve the list of attendees for a specific event with ID.
+
 ### Attend Event
+
+- Method: **PUT**
+- URL: {{URL}}/current-user-event-attendance/:id
+- Data:
+```bash
+{
+    "answer": 1
+}
+```
+- Requires Auth: **YES**
+- Description: This endpoint enables authenticated users to indicate their attendance at a specific event.
 
 ### Get Specific Event Attendance By Current User
 
+- Method: **GET**
+- URL: {{URL}}/current-user-event-attendance/:id
+- Requires Auth: **YES**
+- Description: This endpoint allows authenticated users to retrieve their attendance status for a specific event with ID.
+
 ### Get All Events Attendance By Current User
+
+- Method: **GET**
+- URL: {{URL}}/current-user-event-attendance
+- Requires Auth: **YES**
+- Description: This endpoint allows authenticated users to retrieve their attendance status for all events.
